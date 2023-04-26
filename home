@@ -2,210 +2,46 @@
 ob_start();
 session_start();
 date_default_timezone_set('UTC');
-include "../includes/config.php";
-
-if (!isset($_SESSION['sname']) and !isset($_SESSION['spass'])) {
-    header("location: ../");
-    exit();
-}
-$usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
-?>
-
-
-<<!DOCTYPE html>
- 
+include "includes/config.php";
+if (!isset($_SESSION['sname']) and !isset($_SESSION['spass'])) { header("location: ../");
+ exit();}
+$usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);?>
+<!DOCTYPE html>
 <html>
 <head>
-<title>xLeet</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xBaseTools</title>
 <meta name="csrf_token" content=" ">
-<link rel="stylesheet" href="../layout/css/bootstrap.min.css" >
-<link href="../layout/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="../css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="../layout/toastr/toastr.min.css" rel="stylesheet">
-<link rel="stylesheet" href="../layout/css/loading.css" >
-<link rel="stylesheet" href="../layout/css/colors.css" >
-<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<link rel="icon" href="../layout/img/favicon.png">
-<link rel="shortcut icon" href="../layout/img/favicon.png" type="image/x-icon" />
-<link rel="apple-touch-icon" href="../layout/img/favicon.png"><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link href="layout/css/assets/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="layout/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="layout/css/loading.css" rel="stylesheet" type="text/css">
+<link href="layout/css/toastr.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="layout/css/jquery.dataTables.min.css" >
+<link rel="stylesheet" href="../layout/css/styles.css" >
+
+<link href="https://fonts.googleapis.com/css?family=Late" rel="stylesheet">
+<link rel="shortcut icon" href="layout/images/favicon.png" type="image/x-icon" />
+
 body {
 	font-family: 'Lato', sans-serif;
 	font-size:15px;
 }
 </style>
-<link rel="stylesheet" href="../layout/css/custom.css" >
+<link rel="stylesheet" href="layout/css/.css" >
 
-<script src = "../layout/js/jquery-3.4.1.min.js"></script>
-<script src = "../layout/js/popper.min.js"></script>
-<script src = "../layout/js/bootstrap.min.js"></script>
-<script src = "../layout/js/swal.js"></script>
-<script src="../layout/js/jquery.dataTables.js"></script>
-<script src="../layout/js/dataTables.bootstrap4.js"></script>
-<script src="../layout/js/toastr.min.js"></script>
-
-<script src = "../layout/js/commons.js"></script>
-<script>
-    <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../layout/css/all.min.css"><script type="text/javascript" src="files/js/jquery.js?1"></script>
-<script type="text/javascript" src="files/bootstrap/3/js/bootstrap.js?1"></script>
-<script type="text/javascript" src="files/js/sorttable.js"></script>
-<script type="text/javascript" src="files/js/table-head.js?3334"></script>
-<script type="text/javascript" src="files/js/bootbox.min.js"></script>
-<script type="text/javascript" src="files/js/clipboard.min.js"></script>
-
-<link rel="shortcut icon" href="files/img/favicon.ico" />
-<meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" /> 
- <meta name="referrer" content="no-referrer" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8">
-<title>JeruxShop</title>
+<script src = "layout/js/jquery-3.4.1.min.js"></script>
+<script src = "js/jquery.dataTables.min.js">
 </head>
-<style>
-#table {
-  .sortable
-}
-table th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
-    content: " \25BE" 
-}
-
-.label-as-badge {
-    border-radius: 0.5em;
-}
-
-body {
-    padding-top:0px;
-}
-table.floatThead-table {
-    border-top: none;
-    border-bottom: none;
-    background-color: #fff;
-}
-@media (min-width: 768px) {
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
-}
-
-#mydiv {
-  height: 400px;
-  position: relative;
-}
-.ajax-loader {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto; /* presto! */
-
-}
-
-   
-    
-
-</style>
-<script type="text/javascript">
-             function ajaxinfo() {
-                $.ajax({
-                    type: 'GET',
-                    url: 'ajaxinfo.html',
-                    timeout: 10000,
-
-                    success: function(data) {
-                        if (data != '01') {
-                            var data = JSON.parse(data);
-                            for (var prop in data) {
-                                $("#" + prop).html(data[prop]).show();
-                            }
-                        } else {
-                            window.location = "logout.html";
-                        }
-                    }
-                });
-
-            }
-            setInterval(function() {
-                ajaxinfo()
-            }, 3000);
-
-            ajaxinfo();
-
-$(document).keydown(function(event){
-    if(event.which=="17")
-        cntrlIsPressed = true;
-});
-
-$(document).keyup(function(){
-    cntrlIsPressed = false;
-});
-
-var cntrlIsPressed = false;
 
 
-function pageDiv(n,t,u,x){
-  if(cntrlIsPressed){
-    window.open(u, '_blank');
-    return false;
-  }
-        var obj = { Title: t, Url: u };
-        if ( ("/"+obj.Url) != location.pathname) {
-        	if (x != 1) {history.pushState(obj, obj.Title, obj.Url);}
-        	else{history.replaceState(obj, obj.Title, obj.Url);}
-
-    	}
-      document.title = obj.Title;
-    $("#mainDiv").html('<div id="mydiv"><img src="files/img/load2.gif" class="ajax-loader"></div>').show();
-    $.ajax({
-    type:       'GET',
-    url:        'divPage'+n+'.html',
-    success:    function(data)
-    {
-        $("#mainDiv").html(data).show();
-        newTableObject = document.getElementById('table');
-        sorttable.makeSortable(newTableObject);
-        $(".sticky-header").floatThead({top:60});
-        if(x==0){ajaxinfo();}
-      }});
-    if (typeof stopCheckBTC === 'function') { 
-    var a = stopCheckBTC();
-     }
-
-}
-
-$(window).on("popstate", function(e) {
-        location.replace(document.location);
-
-});
 
 
-$(window).on('load', function() {
-$('.dropdown').hover(function(){ $('.dropdown-toggle', this).trigger('click'); });
-   pageDiv(0,'Main - JeruxShop','index.html',1);
-   var clipboard = new Clipboard('.copyit');
-    clipboard.on('success', function(e) {
-      setTooltip(e.trigger, 'Copied!');
-      hideTooltip(e.trigger);
-      e.clearSelection();
-   });
-
-});
 
 
-function setTooltip(btn, message) {
-  console.log("hide-1");
-  $(btn).tooltip('hide')
-    .attr('data-original-title', message)
-    .tooltip('show');
-     console.log("show");
-}
 
-function hideTooltip(btn) {
-  setTimeout(function() {$(btn).tooltip('hide'); console.log("hide-2");}, 1000);
-}
-</script>
-		
+
         <body>
         </script>
            <nav id = "navbar_id" class="navbar navbar-expand-lg navbar-white bg-white fixed-top">
