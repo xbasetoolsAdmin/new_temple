@@ -1,0 +1,351 @@
+<?php
+ob_start();
+session_start();
+date_default_timezone_set('UTC');
+include "../includes/config.php";
+
+if (!isset($_SESSION['sname']) and !isset($_SESSION['spass'])) {
+    header("location: ../");
+    exit();
+}
+$usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
+?>
+<!DOCTYPE html>
+ 
+<html>
+<head>
+<title>xLeet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf_token" content=" ">
+<link rel="stylesheet" href="../layout/css/bootstrap.min.css" >
+<link href="../layout/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="../css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../layout/toastr/toastr.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../layout/css/loading.css" >
+<link rel="stylesheet" href="../layout/css/colors.css" >
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel="icon" href="../layout/img/favicon.png">
+<link rel="shortcut icon" href="../layout/img/favicon.png" type="image/x-icon" />
+<link rel="apple-touch-icon" href="../layout/img/favicon.png"><style>
+body {
+	font-family: 'Lato', sans-serif;
+	font-size:15px;
+}
+</style>
+<link rel="stylesheet" href="../layout/css/custom.css" >
+
+<script src = "../layout/js/jquery-3.4.1.min.js"></script>
+<script src = "../layout/js/popper.min.js"></script>
+<script src = "../layout/js/bootstrap.min.js"></script>
+<script src = "../layout/js/swal.js"></script>
+<script src="../layout/js/jquery.dataTables.js"></script>
+<script src="../layout/js/dataTables.bootstrap4.js"></script>
+<script src="../layout/js/toastr.min.js"></script>
+
+<script src = "../layout/js/commons.js"></script>
+
+</head>
+
+<script>
+    function setTheme(themeName) {
+        localStorage.setItem('theme', themeName);
+        document.documentElement.className = themeName;
+    }
+ 
+    // function to toggle between light and dark theme
+    function toggleTheme() {
+        if (localStorage.getItem('theme') === 'theme-dark') {
+            setTheme('theme-light');
+        } else {
+            setTheme('theme-dark');
+        }
+    }
+ 
+    // Immediately invoked function to set the theme on initial load
+    (function() {
+        if (localStorage.getItem('theme') === 'theme-dark') {
+            setTheme('theme-dark');
+            document.getElementById('slider').checked = false;
+        } else {
+            setTheme('theme-light');
+            document.getElementById('slider').checked = true;
+        }
+    })();
+</script>
+  <script type="text/javascript">
+                    function ajaxinfo() {
+                              $.ajax({
+                                        type: 'GET',
+                                        url: 'ajaxinfopremium.html',
+                                        timeout: 10000,
+                                        success: function(data) {
+                                                  if (data != '01') {
+                                                            var data = JSON.parse(data);
+                                                            for (var prop in data) {
+                                                                      $("#" + prop) premium.html(data[prop]).show();
+                                                            }
+                                                  } else {
+                                                            window.location = "logoutpremium.html";
+                                                  }
+                                        }
+                              });
+                    }
+                    setInterval(function() {
+                              ajaxinfo()
+                    }, 3000);
+                    ajaxinfo();
+                    $(document).keydown(function(event) {
+                              if (event.which == "17") cntrlIsPressed = true;
+                    });
+                    $(document).keyup(function() {
+                              cntrlIsPressed = false;
+                    });
+                    var cntrlIsPressed = false;
+
+                    function pageDiv(n, t, u, x) {
+                              if (cntrlIsPressed) {
+                                        window.open(u, '_blank');
+                                        return false;
+                              }
+                              var obj = {
+                                        Title: t,
+                                        Url: u
+                              };
+                              if (("/" + obj.Url) != location.pathname) {
+                                        if (x != 1) {
+                                                  history.pushState(obj, obj.Title, obj.Url);
+                                        } else {
+                                                  history.replaceState(obj, obj.Title, obj.Url);
+                                        }
+                              }
+                              document.title = obj.Title;
+                              $("#mainDiv") premium.html('<div id="mydiv"><img src="files/img/load2.gif" class="ajax-loader"></div>').show();
+                              $.ajax({
+                                        type: 'GET',
+                                        url: 'divPage' + n + 'premium.html',
+                                        success: function(data) {
+                                                  $("#mainDiv") premium.html(data).show();
+                                                  newTableObject = document.getElementById('table');
+                                                  sorttable.makeSortable(newTableObject);
+                                                  $(".sticky-header").floatThead({
+                                                            top: 60
+                                                  });
+                                                  if (x == 0) {
+                                                            ajaxinfo();
+                                                  }
+                                        }
+                              });
+                              if (typeof stopCheckBTC === 'function') {
+                                        var a = stopCheckBTC();
+                              }
+                    }
+                    $(window).on("popstate", function(e) {
+                              location.replace(document.location);
+                    });
+                    $(window).on('load', function() {
+                              $('.dropdown').hover(function() {
+                                        $('.dropdown-toggle', this).trigger('click');
+                              });
+                              pageDiv(0, 'premium - xbasetools', 'premium.html', 0);
+                              var clipboard = new Clipboard('.copyit');
+                              clipboard.on('success', function(e) {
+                                        setTooltip(e.trigger, 'Copied!');
+                                        hideTooltip(e.trigger);
+                                        e.clearSelection();
+                              });
+                    });
+
+                    function setTooltip(btn, message) {
+                              console.log("hide-1");
+                              $(btn).tooltip('hide').attr('data-original-title', message).tooltip('show');
+                              console.log("show");
+                    }
+
+                    function hideTooltip(btn) {
+                              setTimeout(function() {
+                                        $(btn).tooltip('hide');
+                                        console.log("hide-2");
+                              }, 1000);
+                    }
+  </script>
+        <body>
+        </script>
+           <nav id = "navbar_id" class="navbar navbar-expand-lg navbar-white bg-white fixed-top">
+                 <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2 home_nav" style="color: var(--font-color); background-color: var(--color-nav);">
+                    <ul class="navbar-nav mr-auto">
+                       <li class="nav-item active">
+                  <a class="main_site_name nav-item nav-link active" style="color: var(--font-color); background-color: var(--color-nav);" href="../homepage">
+					<i class = "middle fab fa-2x fa-redhat pink-color"></i>
+	<span class = 'middle site_name_span'>xLeet</span>
+	  </a>
+ </li>
+ <li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Hosts
+</a>
+<ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="rdp" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-desktop fa-fw"></i> RDPs <span class="badge badge-primary">76</span></span></a>
+       <a class="dropdown-item" href="cPanel" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-tools fa-fw"></i> cPanels <span class="badge badge-primary">14144</span></span></a>
+       <a class="dropdown-item" href="shell" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-file-code fa-fw"></i> Shells <span class="badge badge-primary">1490</span></span></a>
+</ul>
+</li>
+  <li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Send
+</a>
+  <ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="rdp" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-desktop fa-fw"></i> RDPs <span class="badge badge-primary">76</span></span></a>
+       <a class="dropdown-item" href="cPanel" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-tools fa-fw"></i> cPanels <span class="badge badge-primary">14144</span></span></a>
+</ul>
+</li>
+  <li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Leads
+</a>
+ <ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="shell" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-file-code fa-fw"></i> Shells <span class="badge badge-primary">1490</span></span></a>
+</ul>
+</li> 
+<li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Hosts
+</a>
+<ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="rdp" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-desktop fa-fw"></i> RDPs <span class="badge badge-primary">76</span></span></a>
+</ul>
+</li>
+<li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Hosts
+</a>
+<ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="rdp" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-desktop fa-fw"></i> RDPs <span class="badge badge-primary">76</span></span></a>
+</ul>
+</li>
+<li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Hosts
+</a>
+<ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="rdp" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-desktop fa-fw"></i> RDPs <span class="badge badge-primary">76</span></span></a>
+</ul>
+</li>
+<li class="nav-item dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" role="button"  style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-warehouse fa-sm orange-text"></i>
+Hosts
+</a>
+<ul class="dropdown-menu" role="menu style="color: var(--font-color); background-color: var(--color-nav);" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="rdp" style="color: var(--font-color);"><span class="px-2"><i class="fas fa-desktop fa-fw"></i> RDPs <span class="badge badge-primary">76</span></span></a>
+</ul>
+</li>                  
+                  			
+			</div>
+			</li>
+		   </ul>
+    </div>
+      <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#"> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+		 <span class="fa fa-bars"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 user_nav">
+        <ul class="navbar-nav ml-auto">  
+        <?php
+$uid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
+$q = mysqli_query($dbcon, "SELECT resseller FROM users WHERE username='$uid'") or die(mysqli_error());
+$r         = mysqli_fetch_assoc($q);
+$reselerif = $r['resseller'];
+if ($reselerif == "1") {
+    $uid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
+    $q = mysqli_query($dbcon, "SELECT soldb FROM resseller WHERE username='$uid'") or die(mysqli_error());
+    $r = mysqli_fetch_assoc($q);
+
+    echo '<li><a href="https://https://xbasetools/dashboard/seller.html"><span class="badge" title="Seller Panel"><span class="glyphicon glyphicon-cloud"></span><span id="seller"></span></span></a></li>';
+} else {
+} ?><li class="dropdown"><a class="nav-link dropdown-toggle" style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Ticket <span class="badge badge-success">0</span></a> <?php
+$sze112  = mysqli_query($dbcon, "SELECT * FROM ticket WHERE uid='$uid' and seen='1'");
+$r844941 = mysqli_num_rows($sze112);
+if ($r844941 == "1") {
+    echo '<span class="badge badg-danger">1</span>';
+}
+?></span></a>
+    <ul class="dropdown-menu" role="menu" style="color: var(--font-color); background-color: var(--color-nav);">
+<a class="dropdown-item" href="OpenTicket" style="color: var(--font-color);"><span class="px-2">New Ticket</span></a> <?php
+$s1 = mysqli_query($dbcon, "SELECT * FROM ticket WHERE uid='$uid' and seen='1'");
+$r1 = mysqli_num_rows($s1);
+if ($r1 == "1") {
+    echo '<span class="badge badge-success"> 1 New</span>';
+}
+?></span></a></li>
+<a class="dropdown-item" href="orders" style="color: var(--font-color);"><span class="px-2">Report Items</span></a> <?php
+$s1 = mysqli_query($dbcon, "SELECT * FROM reports WHERE uid='$uid' and seen='1'");
+$r1 = mysqli_num_rows($s1);
+if ($r1 == "1") {
+    echo '<span class="badge badge-success"> 1 New</span>';
+}
+?> 
+</li>
+ <a class="nav-link" href="addBalance" style="color: var(--font-color);" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge badge-danger"> 0 <span class="px-2"><i class="fa fa-plus"></i></span></span></a>
+    <li class="dropdown">
+<a class="nav-link dropdown-toggle" style="color: var(--font-color);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> hustlersfather <i class="fa fa-user-secret" style="color: var(--font-color);"></i></a>
+<ul class="dropdown-menu" role="menu" style="color: var(--font-color); background-color: var(--color-nav);">
+<a class="dropdown-item" href="setting" style="color: var(--font-color);"><span class="px-2">Setting <i class="fa fa-cog"></i></span></a>
+<a class="dropdown-item" href="orders" style="color: var(--font-color);"><span class="px-2">My Orders <i class="fa fa-shopping-cart"></i></span></a>
+<a class="dropdown-item" href="addBalance" style="color: var(--font-color);"><span class="px-2">Add Balance <i class="fa fa-money-bill-alt"></i></span></a>
+<a class="dropdown-item" href="logout" style="color: var(--font-color);"><span class="px-2">Logout <i class="fa fa-door-open"></i></span></a>
+                                                            </ul>
+                                                  </li>
+                                        </ul>
+                              </div>
+                              <!-- /.navbar-collapse -->
+                              <!-- /.container-fluid -->
+                    </nav><style>
+                              .modal-dialog.modal-frame.modal-top.modal-notify.modal-danger .modal-body,
+                              .modal-dialog.modal-frame.modal-top.modal-offernov.modal-danger .modal-body {
+                                        padding-top: 35px;
+                              }
+
+                              .modal-dialog.modal-frame.modal-top.modal-notify.modal-danger,
+                              .modal-dialog.modal-frame.modal-top.modal-offernov.modal-danger {
+                                        max-width: 500px !important;
+                                        margin: 1.75rem auto !important;
+                                        position: relative;
+                                        width: auto !important;
+                                        pointer-events: none;
+                              }
+
+                              a.closearb {
+                                        position: absolute;
+                                        top: 2.5px;
+                                        right: 2.5px;
+                                        display: block;
+                                        width: 30px;
+                                        height: 30px;
+                                        text-indent: -9999px;
+                                        background-size: contain;
+                                        background-repeat: no-repeat;
+                                        background-position: center center;
+                                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAA3hJREFUaAXlm8+K00Acx7MiCIJH/yw+gA9g25O49SL4AO3Bp1jw5NvktC+wF88qevK4BU97EmzxUBCEolK/n5gp3W6TTJPfpNPNF37MNsl85/vN/DaTmU6PknC4K+pniqeKJ3k8UnkvDxXJzzy+q/yaxxeVHxW/FNHjgRSeKt4rFoplzaAuHHDBGR2eS9G54reirsmienDCTRt7xwsp+KAoEmt9nLaGitZxrBbPFNaGfPloGw2t4JVamSt8xYW6Dg1oCYo3Yv+rCGViV160oMkcd8SYKnYV1Nb1aEOjCe6L5ZOiLfF120EjWhuBu3YIZt1NQmujnk5F4MgOpURzLfAwOBSTmzp3fpDxuI/pabxpqOoz2r2HLAb0GMbZKlNV5/Hg9XJypguryA7lPF5KMdTZQzHjqxNPhWhzIuAruOl1eNqKEx1tSh5rfbxdw7mOxCq4qS68ZTjKS1YVvilu559vWvFHhh4rZrdyZ69Vmpgdj8fJbDZLJpNJ0uv1cnr/gjrUhQMuI+ANjyuwftQ0bbL6Erp0mM/ny8Fg4M3LtdRxgMtKl3jwmIHVxYXChFy94/Rmpa/pTbNUhstKV+4Rr8lLQ9KlUvJKLyG8yvQ2s9SBy1Jb7jV5a0yapfF6apaZLjLLcWtd4sNrmJUMHyM+1xibTjH82Zh01TNlhsrOhdKTe00uAzZQmN6+KW+sDa/JD2PSVQ873m29yf+1Q9VDzfEYlHi1G5LKBBWZbtEsHbFwb1oYDwr1ZiF/2bnCSg1OBE/pfr9/bWx26UxJL3ONPISOLKUvQza0LZUxSKyjpdTGa/vDEr25rddbMM0Q3O6Lx3rqFvU+x6UrRKQY7tyrZecmD9FODy8uLizTmilwNj0kraNcAJhOp5aGVwsAGD5VmJBrWWbJSgWT9zrzWepQF47RaGSiKfeGx6Szi3gzmX/HHbihwBser4B9UJYpFBNX4R6vTn3VQnez0SymnrHQMsRYGTr1dSk34ljRqS/EMd2pLQ8YBp3a1PLfcqCpo8gtHkZFHKkTX6fs3MY0blKnth66rKCnU0VRGu37ONrQaA4eZDFtWAu2fXj9zjFkxTBOo8F7t926gTp/83Kyzzcy2kZD6xiqxTYnHLRFm3vHiRSwNSjkz3hoIzo8lCKWUlg/YtGs7tObunDAZfpDLbfEI15zsEIY3U/x/gHHc/G1zltnAgAAAABJRU5ErkJggg==);
+                              }
+                    </style>
+    </style>
+    <div class="d-flex flex-row-reverse mt-0">
+        <div class="p-2">
+            <label id="switch" class="switch">
+                <input type="checkbox" onchange="toggleTheme()" id="slider">
+                <span class="slider round">
+                </span>
+            </label>
+        </div>
+    </div>
+ 
+<div id="mainDiv"></div>
+          </body>
+</html>
+
+
+</div>
+</body>
+</html>
+
