@@ -475,6 +475,7 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
                 <span class="slider round"></span>
             </label></div>
     </div>
+
     <div class="alert alert-info text-left" role="alert" style="margin: 15px;">
         <ul>
             <li> Click on check button before buy any RDP to know if it's work or not.</li>
@@ -485,44 +486,27 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
         <div class="col-xs-6 col-sm-4 col-lg-2" style="display:inline-block">
             <label for="country" style="margin-bottom: 10px; margin-top: 5px">Country :</label>
             <select name="country" id="country" class="form-control" style="color: var(--font-color); background-color: var(--color-card);">
+               
+               
                 <option value="">All Countries</option>
-                <option value="Australia">Australia</option>
-                <option value="Brazil">Brazil</option>
-                <option value="France">France</option>
-                <option value="Germany">Germany</option>
-                <option value="Hong Kong">Hong Kong</option>
-                <option value="India">India</option>
-                <option value="Ireland">Ireland</option>
-                <option value="Netherlands">Netherlands</option>
-                <option value="Singapore">Singapore</option>
-                <option value="South Africa">South Africa</option>
-                <option value="South Korea">South Korea</option>
-                <option value="Sweden">Sweden</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="United States">United States</option>
-            </select>
-        </div>
+               
+               </select>
+               </div>
+               
         <div class="col-xs-6 col-sm-4 col-lg-2" style="display:inline-block">
             <label for="hosting" style="margin-bottom: 10px; margin-top: 5px">Hosting :</label>
             <select name="detect_hosting" id="detect_hosting" class="form-control" style="color: var(--font-color); background-color: var(--color-card);">
                 <option value="">All</option>
-                <option value="Amazon Technologies Inc. (AMAZON)">Amazon Technologies Inc. (AMAZON)</option>
-                <option value="Amazon Technologies Inc. (EC2)">Amazon Technologies Inc. (EC2)</option>
-                <option value="Hetzner Online GmbH">Hetzner Online GmbH</option>
-                <option value="Microsoft">Microsoft</option>
-                <option value="Microsoft do Brasil Imp. e Com. Software e Video G">Microsoft do Brasil Imp. e Com. Software e Video G</option>
-                <option value="MICROSOFT-CORP-MSN-AS-BLOCK">MICROSOFT-CORP-MSN-AS-BLOCK</option>
+            
             </select>
         </div>
         <div class="col-xs-6 col-sm-4 col-lg-2" style="display:inline-block">
             <label for="windows" style="margin-bottom: 10px; margin-top: 5px">windows :</label>
             <select name="windows" id="windows" class="form-control" style="color: var(--font-color); background-color: var(--color-card);">
                 <option value="">All</option>
-                <option value="10">10</option>
-                <option value="2012">2012</option>
-                <option value="2019">2019</option>
-            </select>
-        </div>
+               
+               </select>
+      </div>
         <div class="col-xs-6 col-sm-4 col-lg-1" style="display:inline-block">
             <label for="ram" style="margin-bottom: 10px; margin-top: 5px">Ram :</label>
             <input type="search" class="form-control" id="ram" style="color: var(--font-color); background-color: var(--color-card);">
@@ -535,6 +519,7 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
                 <option value="created">created</option>
             </select>
         </div>
+      
         <div class="col-xs-6 col-sm-4 col-lg-2" style="display:inline-block">
             <label for="access" style="margin-bottom: 10px; margin-top: 5px">Access :</label>
             <select name="access" id="access" class="form-control" style="color: var(--font-color); background-color: var(--color-card);">
@@ -546,14 +531,8 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
             <label for="seller" style="margin-bottom: 10px; margin-top: 5px">Seller :</label>
             <select name="seller" id="seller" class="form-control" style="color: var(--font-color); background-color: var(--color-card);">
                 <option value="">All</option>
-                <option value="Seller349">Seller349</option>
-                <option value="Seller382">Seller382</option>
-                <option value="Seller397">Seller397</option>
-                <option value="Seller473">Seller473</option>
-                <option value="Seller457">Seller457</option>
-                <option value="Seller306">Seller306</option>
-                <option value="Seller420">Seller420</option>
-            </select>
+                
+                   </select>
         </div>
     </div>
     <div class="row m-2 pt-3" style="color: var(--font-color); background-color: var(--color-card);">
