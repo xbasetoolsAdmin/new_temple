@@ -17,19 +17,19 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="alfacoins-site-verification" content="5ef8c2279aa605ef8c2279aa965ef8c2279aacb_ALFAcoins">
+    <meta name=" " content=" ">
     <meta name="revisit-after" content="2 days">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="/cdn-cgi/apps/head/AGN3NmUziwZfMV-TNTe1kdyeR2Y.js"></script>
+    <script src="/cdn-cgi/apps/head/ .js"></script>
     <link rel="shortcut icon" href="../../favicon.ico" />
-    <title>RDP</title>
-    <link rel="stylesheet" href="layout/css/bootstrap.min.css">
-    <script src="layout/js/jquery-3.4.1.min.js"></script>
-    <script src="layout/js/clipboard.min.js"></script>
+    <title>XBaseTools</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="assets/js/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/clipboard.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="layout/js/bootstrap.min.js"></script>
-    <script src="layout/js/bootbox.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="layout/css/flags.css" />
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootbox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/flags.css" />
  
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
@@ -55,16 +55,16 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
         }); // Set the user ID using signed-in user_id.
         gtag('config', 'UA-177092549-1');
     </script>
-    <link rel="stylesheet" href="layout/css/all.min.css" />
-    <link rel="stylesheet" href="layout/css/main.css?v=12.9" />
-    <link rel="stylesheet" href="layout/css/util.css" />
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css?v=12.9" />
+    <link rel="stylesheet" href="assets/css/util.css" />
     <style>
         body {
             padding-top: 80px
         }
     </style>
-    <link rel="stylesheet" href="layout/fonts/iconic/css/material-design-iconic-font.min.css">
-    <script src="layout/js/main.js"></script>
+    <link rel="stylesheet" href="assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <script src="assets/js/main.js"></script>
     <script type="text/javascript">
         // Notice how this gets configured before we load Font Awesome
         window.FontAwesomeConfig = {
@@ -295,7 +295,7 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
                                                           padding-bottom: 0.5rem;
                                                           padding-left: 1rem;
                                                         ">
-        <a class="navbar-brand" href="main" style="color: var(--font-color);"><img width="40px" src="layout/images/logo.png"> Odin</a>
+        <a class="navbar-brand" href="main" style="color: var(--font-color);"><img width="40px" src="assets/images/logo.png"> Odin</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="navbar-toggler-icon"></i>
         </button>
@@ -610,7 +610,7 @@ $usrid = mysqli_real_escape_string($dbcon, $_SESSION['sname']);
  
                 <div class="modal-body">
                     <div class="row d-flex justify-content-center align-items-center">
-                        <img src="layout/images/balance.png">
+                        <img src="assets/images/balance.png">
                         <span class="pt-3 mx-4" style="font-size: 14 px"><b>No enough balance !</b> Please refill your balance</span>
                         <a type="button" href="addBalance" onclick="window.open(this.href);return false;" class="btn btn-danger">Add Balance
                             <i class="fas fa-book ml-1 white-text"></i>
